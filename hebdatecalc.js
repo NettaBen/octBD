@@ -90,7 +90,7 @@ let holidays = {
 function computeTishreyBD(dateStr = null) {
     
     let currDate = new Date();
-    console.log(currDate.getFullYear())
+    //console.log(currDate.getFullYear())
     let currYear = currDate.getFullYear();
     let dateArr = dateStr ? dateStr.split('-') : null;
     let birthYear = dateArr ? dateArr[0] : 1980;
@@ -98,13 +98,15 @@ function computeTishreyBD(dateStr = null) {
     let gregMonth = dateArr ? dateArr[1] : 10;
     
     let birthDate = new Date(`${birthYear}-${gregMonth}-${gregDay}`);
-    console.log(birthDate.toDateString())
-    if (!dateStr) {
+    //console.log(birthDate.toDateString())
+    if (!dateStr && !urlParam) {
         document.getElementById('bday').value = 
             `${birthYear}-${gregMonth}-08`;
-    }  
+    } else if(urlParam) {
+        document.getElementById('bday').value = getUrlParam('dateStr');
+    }
     let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    console.log(birthDate.toLocaleDateString('he-IL', options));
+    //console.log(birthDate.toLocaleDateString('he-IL', options));
     let birthDateStr = birthDate.toLocaleDateString('he-IL', options);
     document.getElementsByTagName('h3')[0].innerText = `תאריך לידה: ${birthDateStr}`;
 
@@ -113,7 +115,7 @@ function computeTishreyBD(dateStr = null) {
     
     for (let i = birthYear; i <= (parseInt(birthYear) + 120); i++) {        
         let day = new Hebcal.HDate(new Date(`${i}-${gregMonth}-${gregDay}`));
-        console.log(day.isLeapYear())
+        //console.log(day.isLeapYear())
         let hebDay = day.getDate();
         let hebMonth = day.month;
         //console.log(hebMonth)
@@ -173,5 +175,9 @@ function getUrlParam(name) {
     const results = regex.exec(url)
     return results == null ? null : results[1]
 }
-
+let urlParam = false;
+//console.log(getUrlParam('dateStr'))
+if (getUrlParam('dateStr')) {
+    urlParam = true;
+}
 computeTishreyBD(getUrlParam('dateStr'));
