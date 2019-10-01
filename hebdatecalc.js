@@ -73,8 +73,9 @@ function computeTishreyBD(dateStr = null) {
         }
     }
 
-    document.getElementById('hiMatches').innerHTML = 
-        `סה"כ ${matches} ימי הולדת בחגי תשרי`;
+    document.getElementById('hiMatches').innerHTML = matches ?
+        `סה"כ ${matches} ימי הולדת בחגי תשרי` :
+        `כיפרנו גם בשבילך!!`;
     let groupCnt = 0;
     for (let month in holidays) {
         for (let hDay in holidays[month]) {
