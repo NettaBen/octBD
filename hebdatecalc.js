@@ -87,6 +87,10 @@ let holidays = {
     
 }
 function computeTishreyBD(dateStr = null) {
+    
+    let currDate = new Date();
+    console.log(currDate.getFullYear())
+    let currYear = currDate.getFullYear();
     let dateArr = dateStr ? dateStr.split('-') : null;
     let birthYear = dateArr ? dateArr[0] : 1980;
     let gregDay = dateArr ? dateArr[2] : 8;
@@ -106,7 +110,7 @@ function computeTishreyBD(dateStr = null) {
     let matches = 0;
     let t_matches = 0;
     
-    for (let i = birthYear; i < 2020; i++) {
+    for (let i = birthYear; i <= currYear; i++) {
         let day = new Hebcal.HDate(new Date(`${i}-${gregMonth}-${gregDay}`));
         let hebDay = day.getDate();
         let hebMonth = day.month;
