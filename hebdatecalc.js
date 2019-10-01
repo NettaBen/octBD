@@ -1,5 +1,4 @@
-function updateDate(e) {
-    console.log(e);
+function updateDate(e) {    
     clearHolidaysCount();
     document.getElementById('hi').innerText = '';
     document.getElementById('hiStat').innerText = '';
