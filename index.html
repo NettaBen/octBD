@@ -6,7 +6,7 @@
     </head>
     <style>
         .statLine9, .statLine10 {
-            background-color: rgba(2, 10, 116, 0.5);
+            background-color: rgba(174, 179, 248, 0.5);
             max-width: 100px;
             max-width: 60%;
             align-items: center;
@@ -16,20 +16,25 @@
         .statLine {
         }
 
-        body { max-width: 800px; }
+        body { 
+            max-width: 800px;
+            direction: rtl;
+        }
 
         input {
-            font-size:16px;
-            line-height: 30px;
+            margin: 20px auto;
+            align-content: center;
+            height: 30px;
         }
 
      
     </style>
-    <body direction='rtl' align='center'
-    style=' font-family: Arial, Helvetica, sans-serif; font-size: 18px;
+    <body direction='rtl' align='center'  
+    style='font-family: Arial, Helvetica, sans-serif; font-size: 18px;
            margin: 50px auto; '>
         <h3>October-8</h3>
-        <h4>ימי הולדת בראי חגי תשרי</h4>
+        <h4>כמה כיפרתם?</h4>
+        <h5>מוקדש באהבה לילידי ספטמבר אוקטובר והימים הנוראים</h5>
         <input type="date" style='font-size: 18px;' name="bday" min="1880-01-01" max="2020-01-01" id='bday' onchange='updateDate(this.value);'>
         <div id='hiStat' ></div>
         <br>

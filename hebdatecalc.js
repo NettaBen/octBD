@@ -41,11 +41,13 @@ function computeTishreyBD(dateStr = null) {
     let birthYear = dateArr ? dateArr[0] : 1980;
     let gregDay = dateArr ? dateArr[2] : 8;
     let gregMonth = dateArr ? dateArr[1] : 10;
+    
+    let birthDate = new Date(`${birthYear}-${gregMonth}-${gregDay}`);
+    console.log(birthDate.toDateString())
     if (!dateStr) {
-        document.getElementById('bday').value = `${birthYear}-${gregMonth}-08`
-    }
-    let birthDate = dateStr ? new Date(dateStr)
-        : new Date(`${birthYear}-${gregMonth}-${gregDay}`);
+        document.getElementById('bday').value = 
+            `${birthYear}-${gregMonth}-08`;
+    }  
     let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     console.log(birthDate.toLocaleDateString('he-IL', options));
     let birthDateStr = birthDate.toLocaleDateString('he-IL', options);
@@ -93,4 +95,14 @@ function computeTishreyBD(dateStr = null) {
             `ו - ${groupCnt} בחול המועד`);
     }
 } 
+
+function getUrlParam(name) {
+    if (!url) url = location.href
+    name = name.replace(/[\[]/, '\\\[').replace(/[\]]/, '\\\]')
+    const regexS = `[\\?&]${name}=([^&#]*)`
+    const regex = new RegExp(regexS)
+    const results = regex.exec(url)
+    return results == null ? null : results[1]
+}
+
 computeTishreyBD();
