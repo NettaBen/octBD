@@ -88,16 +88,14 @@ let holidays = {
 }
 function computeTishreyBD(dateStr = null) {
     
-    let currDate = new Date();
-    //console.log(currDate.getFullYear())
+    let currDate = new Date();    
     let currYear = currDate.getFullYear();
     let dateArr = dateStr ? dateStr.split('-') : null;
     let birthYear = dateArr ? dateArr[0] : 1980;
     let gregDay = dateArr ? dateArr[2] : 8;
     let gregMonth = dateArr ? dateArr[1] : 10;
     
-    let birthDate = new Date(`${birthYear}-${gregMonth}-${gregDay}`);
-    //console.log(birthDate.toDateString())
+    let birthDate = new Date(`${birthYear}-${gregMonth}-${gregDay}`);    
     if (!dateStr && !urlParam) {
         document.getElementById('bday').value = 
             `${birthYear}-${gregMonth}-08`;
@@ -108,13 +106,16 @@ function computeTishreyBD(dateStr = null) {
     let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     //console.log(birthDate.toLocaleDateString('he-IL', options));
     let birthDateStr = birthDate.toLocaleDateString('he-IL', options);
-    document.getElementsByTagName('h3')[0].innerText = `תאריך לידה: ${birthDateStr}`;
+    document.getElementsByTagName('h3')[0].innerText = `${uiString[11][lng]}: ${birthDateStr}`;
 
     let matches = 0;
     let t_matches = 0;
-    
-    for (let i = birthYear; i <= (parseInt(birthYear) + 120); i++) {        
-        let day = new Hebcal.HDate(new Date(`${i}-${gregMonth}-${gregDay}`));
+    let maxYear = lng === "heb" ? parseInt(birthYear) +  120: currYear;
+    //let maxYear = parseInt(birthYear) + 120;
+    for (let i = birthYear; i <= (maxYear); i++) {        
+        let day = new Hebcal.HDate(new Date(`${i}-${gregMonth}-${gregDay}`));   
+        let holy = '';
+        
         //console.log(day.isLeapYear())
         let hebDay = day.getDate();
         let hebMonth = day.month;
@@ -122,6 +123,12 @@ function computeTishreyBD(dateStr = null) {
         let tishreyDay = holidays[hebMonth] && holidays[hebMonth][hebDay]
             ? holidays[hebMonth][hebDay] : null;
         if (tishreyDay) {
+            if (lng != 'heb')     
+                holy = day.holidays(false);
+            //console.log(holy)
+            let engDate = lng === 'eng' ? ' '  + day : '';
+            let dateName = !engDate ? tishreyDay.name : holy[0].desc[descId];
+            //console.log(holy)
             if (i <= currYear) {
                 matches++;
                 if (hebMonth == 7) {
@@ -133,19 +140,21 @@ function computeTishreyBD(dateStr = null) {
                 } else {
                     tishreyDay.count++;
                 }
-                let elem = `<div class='ageLine'>יומולדת ${i - birthYear} ב${tishreyDay.name} </div>`;
+                let elem = `<div class='ageLine'>${uiString[0][lng]} ${i - birthYear} ${uiString[1][lng]} ${dateName}</div>`;
                 document.getElementById('hi').insertAdjacentHTML('beforeend',elem);
             } else {
-                let elem = `<div class='ageLine'>יומולדת ${i - birthYear} ב${tishreyDay.name} </div>`;
-                document.getElementById('hiFuture').insertAdjacentHTML('beforeend',elem);
+                //if (lng === "heb") {
+                    let elem = `<div class='ageLine'>${uiString[0][lng]} ${i - birthYear} ${uiString[1][lng]}${dateName} </div>`;
+                    document.getElementById('hiFuture').insertAdjacentHTML('beforeend',elem);
+                //}
             }
         }
     }
 
     document.getElementById('hiMatches').innerHTML = t_matches  ? 
-        `סה"כ ${t_matches} ימי הולדת בחגי תשרי` :
-        `סה"כ ${matches} ימי הולדת בחגי ישראל <br>
-            כיפרנו גם בשבילך!!`;
+        `${uiString[2][lng]} ${t_matches} ${uiString[3][lng]} ${uiString[4][lng]}` :
+        `${uiString[2][lng]} ${matches} ${uiString[3][lng]} ${uiString[5][lng]} <br>        
+            ${uiString[6][lng]}`;
     let groupCnt = 0;
     for (let month in holidays) {
         for (let hDay in holidays[month]) {
@@ -168,6 +177,7 @@ function computeTishreyBD(dateStr = null) {
 } 
 
 function getUrlParam(name) {
+    console.log(location.href)
     let url = location.href
     name = name.replace(/[\[]/, '\\\[').replace(/[\]]/, '\\\]')
     const regexS = `[\\?&]${name}=([^&#]*)`
@@ -175,6 +185,22 @@ function getUrlParam(name) {
     const results = regex.exec(url)
     return results == null ? null : results[1]
 }
+
+function prepareStrings() {    
+    document.title = uiString[7][lng];
+    let elems = document.querySelectorAll(`[dic-id]`);
+    elems.forEach(function(el) {
+        el.innerText = uiString[el.getAttribute('dic-id')][lng];
+    })
+}
+
+let lng = getUrlParam('lng') && ['heb','eng'].indexOf(getUrlParam('lng')) > -1 ? getUrlParam('lng') : 'heb';
+let descId = lng === 'heb' ? 2 : 0;
+if (lng != 'heb') {
+    document.body.style.direction = 'ltr';
+    document.body.direction = 'ltr';
+}
+prepareStrings();
 let urlParam = false;
 //console.log(getUrlParam('dateStr'))
 if (getUrlParam('dateStr')) {

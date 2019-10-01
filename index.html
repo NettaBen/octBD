@@ -29,14 +29,32 @@
 
      
     </style>
-    <title>חגי הולדת</title>
+    <script>
+        let uiString = {
+    0 : {heb: "יומולדת ", eng: "Aged "},
+    1 : {heb: "ב", eng: "in "},
+    2 : {heb: 'סה"כ ', eng: "Total "},
+    3 : {heb: "ימי הולדת ", eng: "birthdays  "},
+    4 : {heb: " בחגי תשרי", eng: "in Tishrey Holidays"},
+    5 : {heb: " בחגי ישראל", eng: "in Jewish Holidays"},
+    6 : {heb: "כיפרנו גם בשבילך!!", eng: "We atoned for YOU too"},
+    7 : {heb: "חגי הולדת", eng: "Birthdays Jewish hoildyas"},
+    8 : {heb: "יום הולדת יכול להיות גם יום חג :)", eng: "A birthday can also be a Holyday :)"},
+    9 : {heb: "כמה כיפרתם?", eng: "How much did tou atone?"},
+    10 : {heb: "מוקדש באהבה לילידי ספטמבר אוקטובר והימים הנוראים", eng: "Dedicated to the children of the 'Yamim Noraim'"},
+    11 : {heb: "תאריך לידה", eng: "Birthdate"},
+    
+}
+    </script>
+    <title><script>uiStrings[7][lng];</script></title>
     <body direction='rtl' align='center'  
     style='font-family: Arial, Helvetica, sans-serif; font-size: 18px;
            margin: 50px auto; '>
         <h3>October-8</h3>
-        <h4>יום הולדת יכול להיות גם יום חג :)</h4>
-        <h4>כמה כיפרתם?</h4>
-        <h5>מוקדש באהבה לילידי ספטמבר אוקטובר והימים הנוראים</h5>
+        <a class='heb' href='https://nettaben.github.io/octBD/index.html?lng=eng'>Eng</a>        
+        <h4 dic-id=8></h4>
+        <h4 dic-id=9>כמה כיפרתם?</h4>
+        <h5 dic-id=10>מוקדש באהבה לילידי ספטמבר אוקטובר והימים הנוראים</h5>
         <input type="date" style='font-size: 18px;' name="bday" min="1880-01-01" max="2200-01-01" id='bday' onchange='updateDate(this.value);'>
         <div id='hiStat' ></div>
         <br>
