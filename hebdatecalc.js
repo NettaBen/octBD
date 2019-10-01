@@ -3,6 +3,7 @@ function updateDate(e) {
     clearHolidaysCount();
     document.getElementById('hi').innerText = '';
     document.getElementById('hiStat').innerText = '';
+    document.getElementById('hiFuture').innerText = '';
     document.getElementById('hiMatches').innerText = '';
     computeTishreyBD(e)
 }
@@ -110,7 +111,7 @@ function computeTishreyBD(dateStr = null) {
     let matches = 0;
     let t_matches = 0;
     
-    for (let i = birthYear; i <= currYear; i++) {
+    for (let i = birthYear; i <= (parseInt(birthYear) + 120); i++) {        
         let day = new Hebcal.HDate(new Date(`${i}-${gregMonth}-${gregDay}`));
         let hebDay = day.getDate();
         let hebMonth = day.month;
@@ -133,7 +134,7 @@ function computeTishreyBD(dateStr = null) {
                 document.getElementById('hi').insertAdjacentHTML('beforeend',elem);
             } else {
                 let elem = `<div class='ageLine'>יומולדת ${i - birthYear} ב${tishreyDay.name} </div>`;
-                document.getElementById('hi').insertAdjacentHTML('beforeend',elem);
+                document.getElementById('hiFuture').insertAdjacentHTML('beforeend',elem);
             }
         }
     }
