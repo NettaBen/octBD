@@ -58,9 +58,9 @@ let holidays = {
         15: {name: 'שושן פורים'},
     },
     13 : {
-        13: {name: 'תענית אסתר'},
-        14: {name: 'פורים'},
-        15: {name: 'שושן פורים'},
+        13: {name: 'תענית אסתר', leapYear: true},
+        14: {name: 'פורים', leapYear: true},
+        15: {name: 'שושן פורים', leapYear: true},
     },    
     1: {        
         14: {name: 'ערב פסח'},
@@ -74,7 +74,7 @@ let holidays = {
         22 : {name: "איסרו פסח", group: 1},
     },
     2: {
-        17: 'ל"ג בעומר'
+        17: {name:'ל"ג בעומר'}
     },
     3 : {
         5 : {name: "ערב שבועות"},
@@ -113,6 +113,7 @@ function computeTishreyBD(dateStr = null) {
     
     for (let i = birthYear; i <= (parseInt(birthYear) + 120); i++) {        
         let day = new Hebcal.HDate(new Date(`${i}-${gregMonth}-${gregDay}`));
+        console.log(day.isLeapYear())
         let hebDay = day.getDate();
         let hebMonth = day.month;
         //console.log(hebMonth)
