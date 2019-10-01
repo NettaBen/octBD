@@ -110,7 +110,7 @@ function computeTishreyBD(dateStr = null) {
     let matches = 0;
     let t_matches = 0;
     
-    for (let i = birthYear; i <= currYear; i++) {
+    for (let i = birthYear; i <= birthYear +120; i++) {
         let day = new Hebcal.HDate(new Date(`${i}-${gregMonth}-${gregDay}`));
         let hebDay = day.getDate();
         let hebMonth = day.month;
@@ -118,16 +118,23 @@ function computeTishreyBD(dateStr = null) {
         let tishreyDay = holidays[hebMonth] && holidays[hebMonth][hebDay]
             ? holidays[hebMonth][hebDay] : null;
         if (tishreyDay) {
-            matches++;
-            if (hebMonth == 7)
-                t_matches++;
-            if (!tishreyDay.count) {
-                tishreyDay.count = 1;
+            if (i <= currYear) {
+                matches++;
+                if (hebMonth == 7) {
+                    t_matches++;
+                }
+
+                if (!tishreyDay.count) {
+                    tishreyDay.count = 1;
+                } else {
+                    tishreyDay.count++;
+                }
+                let elem = `<div class='ageLine'>יומולדת ${i - birthYear} ב${tishreyDay.name} </div>`;
+                document.getElementById('hi').insertAdjacentHTML('beforeend',elem);
             } else {
-                tishreyDay.count++;
+                let elem = `<div class='ageLine ageFuture'>יומולדת ${i - birthYear} צפוי להחגג ב${tishreyDay.name} </div>`;
+                document.getElementById('hiFuture').insertAdjacentHTML('beforeend',elem);
             }
-            let elem = `<div class='ageLine'>יומולדת ${i - birthYear} ב${tishreyDay.name} </div>`;
-            document.getElementById('hi').insertAdjacentHTML('beforeend',elem);
         }
     }
 
