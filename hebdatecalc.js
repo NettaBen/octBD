@@ -126,7 +126,7 @@ function computeTishreyBD(dateStr = null) {
             } else {
                 tishreyDay.count++;
             }
-            let elem = `<div class='ageLine'>יומולדת ${i - birthYear} ב  ${tishreyDay.name} </div>`;
+            let elem = `<div class='ageLine'>יומולדת ${i - birthYear} ב${tishreyDay.name} </div>`;
             document.getElementById('hi').insertAdjacentHTML('beforeend',elem);
         }
     }
