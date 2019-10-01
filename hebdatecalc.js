@@ -98,7 +98,7 @@ function computeTishreyBD(dateStr = null) {
 } 
 
 function getUrlParam(name) {
-    if (!url) url = location.href
+    let url = location.href
     name = name.replace(/[\[]/, '\\\[').replace(/[\]]/, '\\\]')
     const regexS = `[\\?&]${name}=([^&#]*)`
     const regex = new RegExp(regexS)
@@ -106,4 +106,4 @@ function getUrlParam(name) {
     return results == null ? null : results[1]
 }
 
-computeTishreyBD();
+computeTishreyBD(getUrlParam('dateStr'));
