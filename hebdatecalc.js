@@ -4,6 +4,7 @@ function updateDate(e) {
     document.getElementById('hi').innerText = '';
     document.getElementById('hiStat').innerText = '';
     document.getElementById('hiMatches').innerText = '';
+    document.getElementById('hiFuture').innerText = '';
     computeTishreyBD(e)
 }
 
