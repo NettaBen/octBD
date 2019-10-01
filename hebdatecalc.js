@@ -104,6 +104,7 @@ function computeTishreyBD(dateStr = null) {
             `${birthYear}-${gregMonth}-08`;
     } else if(urlParam) {
         document.getElementById('bday').value = getUrlParam('dateStr');
+        urlParam = false;
     }
     let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     //console.log(birthDate.toLocaleDateString('he-IL', options));
