@@ -194,13 +194,20 @@ function prepareStrings() {
     })
 }
 
+//Init
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 let lng = getUrlParam('lng') && ['heb','eng'].indexOf(getUrlParam('lng')) > -1 ? getUrlParam('lng') : 'heb';
 let descId = lng === 'heb' ? 2 : 0;
+
 if (lng != 'heb') {
     document.body.style.direction = 'ltr';
     document.body.direction = 'ltr';
     document.getElementsByTagName('a')[0].href = `https://nettaben.github.io/octBD/index.html`;
     document.getElementsByTagName('a')[0].innerText = `Heb`;   
+}
+if (isMobile) {
+    document.getElementsByTagName('input')[0].style.height = "2.375rem";
+    document.getElementsByTagName('input')[0].classList.add('mobileInput');
 }
 prepareStrings();
 let urlParam = false;
