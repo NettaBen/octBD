@@ -170,6 +170,9 @@ function computeTishreyBD(dateStr = null) {
             }
         }
     }
+    
+    let newUrl = updateQueryStringParameter('dateStr', document.getElementById('bday').value)
+	history.pushState({}, null, newUrl);
     /*if (groupCnt) {
         document.getElementById('hiStat').insertAdjacentHTML('beforeend', 
             `ו - ${groupCnt} בחול המועד`);
@@ -184,6 +187,18 @@ function getUrlParam(name) {
     const regex = new RegExp(regexS)
     const results = regex.exec(url)
     return results == null ? null : results[1]
+}
+
+function updateQueryStringParameter(key, value) {
+	let uri = window.location.href
+	let re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+	let separator = uri.indexOf('?') !== -1 ? "&" : "?";
+	if (uri.match(re)) {
+		return uri.replace(re, '$1' + key + "=" + value + '$2');
+	}
+	else {
+		return uri + separator + key + "=" + value;
+	}
 }
 
 function prepareStrings() {    
