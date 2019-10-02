@@ -170,10 +170,10 @@ function computeTishreyBD(dateStr = null) {
             }
         }
     }
-    if (groupCnt) {
+    /*if (groupCnt) {
         document.getElementById('hiStat').insertAdjacentHTML('beforeend', 
             `ו - ${groupCnt} בחול המועד`);
-    }
+    }*/
 } 
 
 function getUrlParam(name) {
