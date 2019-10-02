@@ -140,7 +140,7 @@ function computeTishreyBD(dateStr = null) {
                 } else {
                     tishreyDay.count++;
                 }
-                let elem = `<div class='ageLine'>${uiString[0][lng]} ${i - birthYear} ${uiString[1][lng]} ${dateName}</div>`;
+                let elem = `<div class='ageLine'>${uiString[0][lng]} ${i - birthYear} ${uiString[1][lng]}${dateName}</div>`;
                 document.getElementById('hi').insertAdjacentHTML('beforeend',elem);
             } else {
                 //if (lng === "heb") {
