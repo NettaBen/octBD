@@ -177,7 +177,7 @@ function computeTishreyBD(dateStr = null) {
 } 
 
 function getUrlParam(name) {
-    console.log(location.href)
+    //console.log(location.href)
     let url = location.href
     name = name.replace(/[\[]/, '\\\[').replace(/[\]]/, '\\\]')
     const regexS = `[\\?&]${name}=([^&#]*)`
@@ -199,6 +199,8 @@ let descId = lng === 'heb' ? 2 : 0;
 if (lng != 'heb') {
     document.body.style.direction = 'ltr';
     document.body.direction = 'ltr';
+    document.getElementsByTagName('a')[0].href = `https://nettaben.github.io/octBD/index.html`;
+    document.getElementsByTagName('a')[0].innerText = `Heb`;   
 }
 prepareStrings();
 let urlParam = false;
