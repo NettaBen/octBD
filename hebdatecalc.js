@@ -114,6 +114,8 @@ function computeTishreyBD(dateStr = null) {
     //let maxYear = parseInt(birthYear) + 120;
     for (let i = birthYear; i <= (maxYear); i++) {        
         let day = new Hebcal.HDate(new Date(`${i}-${gregMonth}-${gregDay}`));   
+        
+        
         let holy = '';
         
         //console.log(day.isLeapYear())
@@ -122,6 +124,11 @@ function computeTishreyBD(dateStr = null) {
         //console.log(hebMonth)
         let tishreyDay = holidays[hebMonth] && holidays[hebMonth][hebDay]
             ? holidays[hebMonth][hebDay] : null;
+        if ((day.month == 2 && [2,3,4,5,6].indexOf(day.day) > -1) || 
+            (day.month == 1 && [25,26,27,28].indexOf(day.day) > -1)) {
+            //console.log(day.holidays())
+            tishreyDay = checkIsraelHoliday(day)
+        }
         if (tishreyDay) {
             if (lng != 'heb')     
                 holy = day.holidays();
@@ -209,6 +216,22 @@ function prepareStrings() {
     })
 }
 
+function checkIsraelHoliday(day) {
+    let currDayHoly = day.holidays();
+    let nextDay = day.next().holidays();
+    let dayName = '';
+    if (currDayHoly.length || nextDay.length) {
+        try {
+            dayName = currDayHoly[0].desc[2]
+        } catch (e) {
+            dayName = "ערב " + nextDay[0].desc[2];
+        }
+        if (dayName.indexOf("יום") > - 1)
+            return {name: dayName};
+    } else {
+        return null;
+    }   
+}
 //Init
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 let lng = getUrlParam('lng') && ['heb','eng'].indexOf(getUrlParam('lng')) > -1 ? getUrlParam('lng') : 'heb';
