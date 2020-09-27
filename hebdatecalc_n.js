@@ -101,7 +101,7 @@ function computeTishreyBD(dateStr = null) {
             `${birthYear}-${gregMonth}-08`;
     } else if(urlParam) {
         document.getElementById('bday').value = getUrlParam('dateStr');
-        urlParam = false;
+        urlParam = false;		
     }
     let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     //console.log(birthDate.toLocaleDateString('he-IL', options));
@@ -124,7 +124,7 @@ function computeTishreyBD(dateStr = null) {
             ? holidays[hebMonth][hebDay] : null;
         if (tishreyDay) {
             if (lng != 'heb')     
-                holy = day.holidays();
+                holy = day.holidays(false);
             //console.log(holy)
             let engDate = lng === 'eng' ? ' '  + day : '';
             let dateName = !engDate ? tishreyDay.name : holy[0].desc[descId];
@@ -170,8 +170,8 @@ function computeTishreyBD(dateStr = null) {
             }
         }
     }
-    
-    let newUrl = updateQueryStringParameter('dateStr', document.getElementById('bday').value)
+	
+	let newUrl = updateQueryStringParameter('dateStr', document.getElementById('bday').value)
 	history.pushState({}, null, newUrl);
     /*if (groupCnt) {
         document.getElementById('hiStat').insertAdjacentHTML('beforeend', 
